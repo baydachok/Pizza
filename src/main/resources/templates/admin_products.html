@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin_layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>База данных пицц</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container mt-5 text-light bg-black p-5 rounded-5 mb-5">
+        <h1 class="mb-4">Пиццы</h1>
+        <div class="row mb-5">
+            <a class="btn btn-outline-light mb-4" href="/admin/products/add">Добавить Пиццу</a>
+            <form class="col-md-12" method="post">
+                <div class="site-blocks-table">
+                    <table class="table table-bordered text-light">
+                        <thead>
+                        <tr>
+                            <th>Id пиццы</th>
+                            <th class="product-thumbnail">Изображение</th>
+                            <th class="product-name">Наименование</th>
+                            <th class="product-name">Описание</th>
+                            <th class="product-price">Цена</th>
+                            <th>Редактирование</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product: ${products}" class="text-light">
+                            <td th:text="${product.getId()}"></td>
+                            <td class="product-thumbnail">
+                                <img th:src="${product.getImage()}" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
+                            </td>
+                            <td class="product-name">
+                                <h2 th:text="${product.getName()}" class="h5"></h2>
+                            </td>
+                            <td th:text="${product.getDescription()}" class="h6"></td>
+                            <td th:text="${product.getPrice()}"></td>
+                            <td><a th:href="@{/admin/products/{id}/edit(id=${product.getId()})}" class="btn btn-secondary ">Редактировать</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

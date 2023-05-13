@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin_layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>База данных пользователей</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container mt-5 text-light bg-black p-5 rounded-5 mb-5">
+        <h1 class="mb-4">Пользователи</h1>
+        <div class="row mb-5">
+            <form class="col-md-12" method="post">
+                <div class="site-blocks-table">
+                    <table class="table table-bordered text-light">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Имя</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user: ${users}" class="text-light">
+                            <td>
+                                <h2 th:text="${user.getId()}" class="h5"></h2>
+                            </td>
+                            <td>
+                                <h2 th:text="${user.getUsername()}" class="h5"></h2>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
