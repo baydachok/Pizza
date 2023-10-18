@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin_layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>База данных пользователей</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container mt-5 text-light bg-black p-5 rounded-5 mb-5">
+        <h1 class="mb-4">Заказы</h1>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="site-blocks-table">
+                    <table class="table table-bordered text-light">
+                        <thead>
+                        <tr>
+                            <th>Id заказа</th>
+                            <th>Имя пользователя</th>
+                            <th>Полный список</th>
+                            <th>Удаление</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order: ${orders}" class="text-light">
+                            <td>
+                                <h2 th:text="${order.getId()}" class="h5">1</h2>
+                            </td>
+                            <td>
+                                <h2 th:text="${order.getUser().getUsername()}" class="h5">Tom</h2>
+                            </td>
+                            <td><a th:href="@{/admin/orders/{id}(id=${order.getId()})}" class="btn btn-secondary">Перейти к заказу</a></td>
+                            <td><form th:method="POST" th:action="@{/admin/orders/{id}/delete(id=${order.getId()})}"><button class="btn btn-danger btn-lg">X</button></form></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

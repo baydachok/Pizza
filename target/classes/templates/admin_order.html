@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Заказ пользователя</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="container mt-5 text-light bg-black p-5 rounded-5 mb-5">
+        <h1 class="mb-4" th:text="'Заказ #' + ${order.getId()}"></h1><small class="text-muted" th:text="' ' + ${order.getStatus()}"></small>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="site-blocks-table">
+                    <table class="table table-bordered text-light">
+                        <thead>
+                        <tr>
+                            <th class="product-thumbnail">Изображение</th>
+                            <th class="product-name">Название</th>
+                            <th class="product-price">Цена</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product: ${order.getProducts()}" class="text-light">
+                            <td class="product-thumbnail">
+                                <img th:src="${product.getImage()}" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
+                            </td>
+                            <td class="product-name">
+                                <h2 th:text="${product.getName()}" class="h5"></h2>
+                            </td>
+                            <td th:text="${product.getPrice()} + ' руб.'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <h3 class="text-light" th:text="'Общая сумма: ' + ${order.getTotal()} + ' руб.'"></h3>
+    </div>
+</div>
+
+</html>

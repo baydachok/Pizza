@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <style>
+        .price-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .price-btn:before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .price-btn:hover:before {
+            left: 0;
+        }
+    </style>
+</head>
+
+<div layout:fragment="content">
+    <div>
+        <div class="container vh-100">
+            <div class="h-100 d-flex align-items-center justify-content-center flex-column">
+                <h1 class="text-center text-light mb-4 display-1" style="font-family: 'Castoro Titling', cursive;">
+                    PIZZA BY BAYDAK</h1>
+                <h6 class="text-center text-light text-opacity-75"
+                    style="font-family: 'Jost', sans-serif; font-size: 30px"></h6>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class=" row" >
+            <div class="col-sm-4"  th:each="product: ${products}">
+                <div class="card bg-black border text-light rounded-5 mb-3">
+                    <img th:src="${product.getImage()}"
+                         class="card-img-top mx-auto" alt="..." style="width: 300px; height: 300px;">
+                    <div class="card-body p-4">
+                        <h5 th:text="${product.getName()}" class="card-title">Название карточки</h5>
+                        <p th:text="${product.getDescription()}" class="card-text text-light text-opacity-50">Краткое
+                            описание карточки.</p>
+                        <form th:method="POST" th:action="@{/cart/add-product/{id}(id=${product.getId()})}">
+                            <button type="submit" th:text="${product.getPrice()+' руб.'}"
+                                    class="btn btn-outline-light price-btn"
+                                    data-text="Добавить в корзину">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const priceBtns = document.querySelectorAll('.price-btn');
+
+    priceBtns.forEach((btn) => {
+        const originalText = btn.innerText;
+        const newText = btn.getAttribute('data-text');
+
+        btn.addEventListener('mouseover', () => {
+            btn.innerText = newText;
+        });
+
+        btn.addEventListener('mouseout', () => {
+            btn.innerText = originalText;
+        });
+    });
+</script>
+
+</html>
