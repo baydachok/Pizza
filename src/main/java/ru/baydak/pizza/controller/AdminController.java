@@ -12,12 +12,28 @@ import ru.baydak.pizza.service.OrderService;
 import ru.baydak.pizza.service.PizzaService;
 import ru.baydak.pizza.service.UserService;
 
+
+/**
+ * Котролер отвечающий за панель администратора
+ */
 @Controller
 @AllArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
+
+    /**
+     * Сервис Заказов, отвечающий за ВЕСЬ заказ
+     */
     private final OrderService orderService;
+
+    /**
+     * Сервис пицц
+     */
     private final PizzaService pizzaService;
+
+    /**
+     * Сервис юзеров, отвечающий за закаов конкретного
+     */
     private final UserService userService;
 
     @GetMapping("/products")

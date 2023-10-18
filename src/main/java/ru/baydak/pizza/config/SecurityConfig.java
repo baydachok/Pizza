@@ -11,10 +11,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+/**
+ * Defoult confif Secuirity
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+/**
+ * Checked
+ */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -33,7 +39,9 @@ public class SecurityConfig {
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/");
         return http.build();
     }
-
+    /**
+     * Декодирует наши пароли
+     * */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity,
                                                        UserDetailsService userDetailsService,
@@ -42,7 +50,10 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(encoder).and().build();
     }
-
+    /**
+     * Кодирует наши пароли
+     * @return закодированный пароль
+     * */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -6,6 +6,10 @@ import ru.baydak.pizza.domain.model.User;
 
 import java.util.Optional;
 
+
+/**
+ * Репозиторий Юзера, ищущий нужного юзера
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUsername(String username);

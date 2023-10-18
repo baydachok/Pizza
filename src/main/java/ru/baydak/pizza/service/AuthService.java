@@ -11,6 +11,9 @@ import ru.baydak.pizza.security.SecurityUser;
 
 import java.util.Optional;
 
+/**
+ * Сервис отвечающий за авторизацию
+ */
 @Service
 @AllArgsConstructor
 public class AuthService {
